@@ -1,0 +1,1 @@
+This is 42 seoul dash [project](https://github.com/keonwoo98/42_Eduthon)
