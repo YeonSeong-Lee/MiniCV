@@ -1,6 +1,6 @@
 NAME = zoom	 
 CC = cc
-CFLAGS= -Wall -Wextra -Werror
+CFLAGS= -Wall -Wextra -Werror -fpack-struct
 RM = rm -rf
 
 all :
