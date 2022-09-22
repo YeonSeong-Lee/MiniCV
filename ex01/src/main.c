@@ -6,7 +6,7 @@
 /*   By: seongyle <seongyle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 14:58:15 by seongyle          #+#    #+#             */
-/*   Updated: 2022/09/22 20:50:59 by seongyle         ###   ########seoul.kr  */
+/*   Updated: 2022/09/22 21:43:05 by seongyle         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int	main(void)
 	}
 	fread(&bitmap_info_header, sizeof(t_info_header), 1, fp);
 	buf_size = sizeof(unsigned char) * bitmap_info_header.bi_width * bitmap_info_header.bi_height * 3;
+	printf("%zu\n", buf_size);
 	buf = (unsigned char *)safe_malloc(buf_size);
 	new_buf = (unsigned char *)safe_malloc(buf_size);
 	while (height < bitmap_info_header.bi_height)
@@ -78,14 +79,20 @@ int	main(void)
 	i = 0;
 	while (i < buf_size)
 	{
+		// ft_swap_char(&(buf[i]), &(buf[buf_size - i - 1]));
 		new_buf[i] = buf[i];
 		i++;
 	}
+	// while (i < buf_size)
+	// {
+	// 	new_buf[i] = buf[i];
+	// 	i++;
+	// }
 
 	wfp = fopen("test.bmp", "w");
 	fwrite(&bitmap_header, sizeof(t_file_header), 1, wfp);
 	fwrite(&bitmap_info_header, sizeof(t_info_header), 1, wfp);
-	fwrite(buf, buf_size, 3, wfp);
+	fwrite(new_buf, buf_size, 3, wfp);
 	fclose(wfp);
 	return(0);
 }
